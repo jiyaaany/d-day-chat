@@ -1,7 +1,23 @@
 import React from 'react';
+import moment from 'moment';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 export default class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            newDate: "",
+            diff: "",
+        }
+    }
+
+    componentDidMount() {
+        this.setState({ newDate: moment('2021-01-01').format('YYYY년 MM월 DD일') });
+        this.setState({ diff: moment('2021-01-01').diff(moment(), 'days') });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -19,11 +35,11 @@ export default class App extends React.Component {
                             2021년까지
                     </Text>
                         <Text style={styles.ddayText}>
-                            D-100
-                    </Text>
+                            D-{this.state.diff + 1}
+                        </Text>
                         <Text style={styles.dateText}>
-                            2021년 1월 1일
-                    </Text>
+                            {this.state.newDate}
+                        </Text>
                     </View>
                     <View style={styles.chatView}>
                         <ScrollView style={styles.chatScrollView}>
